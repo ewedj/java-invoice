@@ -125,4 +125,24 @@ public class InvoiceTest {
     public void testAddingNullProduct() {
         invoice.addProduct(null);
     }
+
+    @Test
+    public void testInvoiceHasNumber() {
+        Invoice invoice1 = new Invoice();
+        int number = invoice1.getNumber();
+    }
+    @Test
+    public void testInvoiceNumberIsGreaterThan0() {
+        Assert.assertTrue(new Invoice().getNumber() > 0);
+    }
+
+    @Test
+    public void testInvoiceNumberIsGreaterPreviousOne() {
+        int n1 = new Invoice().getNumber();
+        int n2 = new Invoice().getNumber();
+        Assert.assertTrue(n1 < n2);
+
+
+    }
 }
+
