@@ -12,7 +12,7 @@ import pl.edu.agh.mwo.invoice.product.TaxFreeProduct;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.math.BigDecimal;
-import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class WydrukFakturyTest {
@@ -26,6 +26,7 @@ public class WydrukFakturyTest {
 
     @Before
     public void setUpStreams() {
+        Locale.setDefault(Locale.US);
         System.setOut(new PrintStream(outContent));
         wydrukFaktury = new WydrukFaktury();
     }
@@ -48,8 +49,8 @@ public class WydrukFakturyTest {
 
         wydrukFaktury.drukujPozycje(products);
         String content = outContent.toString();
-        Assert.assertThat(content, CoreMatchers.containsString("| Towar: Tablet  | Ilosc: 23 | Wartosc: 38594,00 PLN|"));
-        Assert.assertThat(content, CoreMatchers.containsString("| Towar: kaczka  | Ilosc: 2 | Wartosc: 4,00 PLN|"));
+        Assert.assertThat(content, CoreMatchers.containsString("| Towar: Tablet  | Ilosc: 23 | Wartosc: 38594.00 PLN|"));
+        Assert.assertThat(content, CoreMatchers.containsString("| Towar: kaczka  | Ilosc: 2 | Wartosc: 4.00 PLN|"));
     }
 
     @Test
