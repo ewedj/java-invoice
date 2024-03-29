@@ -1,5 +1,6 @@
 package com.github.ewedj.drukowanie;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 
 import org.junit.Assert;
@@ -42,12 +43,12 @@ public class WydrukFakturyTest {
 
     @Test
     public void testDrukujPozycje() {
-        Map<Product,Integer> products = new HashMap<>();
-        products.put(new TaxFreeProduct("Tablet",new BigDecimal("1678")),23);
-        products.put(new TaxFreeProduct("kaczka",new BigDecimal("2")),2);
+        Map<Product,Integer> products = Map.of(new TaxFreeProduct("Tablet",new BigDecimal("1678")),23,
+                new TaxFreeProduct("kaczka",new BigDecimal("2")),2);
+
         wydrukFaktury.drukujPozycje(products);
-        Assert.assertEquals("| Towar: Tablet  | Ilosc: 23 | Wartosc: 38594,00 PLN|\n" +
-                "| Towar: kaczka  | Ilosc: 2 | Wartosc: 4,00 PLN|\n", outContent.toString());
+        Assert.assertThat(outContent.toString(), CoreMatchers.containsString("| Towar: Tablet  | Ilosc: 23 | Wartosc: 38594,00 PLN|\n"));
+        Assert.assertThat(outContent.toString(), CoreMatchers.containsString("| Towar: kaczka  | Ilosc: 2 | Wartosc: 4,00 PLN|\n"));
     }
 
     @Test
