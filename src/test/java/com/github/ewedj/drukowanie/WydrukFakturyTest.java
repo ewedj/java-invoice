@@ -47,8 +47,9 @@ public class WydrukFakturyTest {
                 new TaxFreeProduct("kaczka",new BigDecimal("2")),2);
 
         wydrukFaktury.drukujPozycje(products);
-        Assert.assertThat(outContent.toString(), CoreMatchers.containsString("| Towar: Tablet  | Ilosc: 23 | Wartosc: 38594,00 PLN|\n"));
-        Assert.assertThat(outContent.toString(), CoreMatchers.containsString("| Towar: kaczka  | Ilosc: 2 | Wartosc: 4,00 PLN|\n"));
+        String content = outContent.toString();
+        Assert.assertThat(content, CoreMatchers.containsString("| Towar: Tablet  | Ilosc: 23 | Wartosc: 38594,00 PLN|"));
+        Assert.assertThat(content, CoreMatchers.containsString("| Towar: kaczka  | Ilosc: 2 | Wartosc: 4,00 PLN|"));
     }
 
     @Test
