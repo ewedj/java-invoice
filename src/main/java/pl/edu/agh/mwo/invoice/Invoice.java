@@ -12,6 +12,8 @@ public class Invoice {
     private static int lastNumber = 0;
     private final int number;
 
+    private int productsQuantity = 0;
+
     public Invoice() {
         this.number = ++lastNumber;
     }
@@ -25,6 +27,7 @@ public class Invoice {
             throw new IllegalArgumentException();
         }
         products.put(product, quantity);
+        productsQuantity += quantity;
     }
 
     public BigDecimal getNetTotal() {
@@ -51,5 +54,13 @@ public class Invoice {
 
     public int getNumber() {
         return number;
+    }
+
+    public int getProductsQuantity() {
+        return productsQuantity;
+    }
+
+    public Map<Product, Integer> getProducts() {
+        return products;
     }
 }

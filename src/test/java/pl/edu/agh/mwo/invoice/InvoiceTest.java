@@ -7,7 +7,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import pl.edu.agh.mwo.invoice.Invoice;
 import pl.edu.agh.mwo.invoice.product.DairyProduct;
 import pl.edu.agh.mwo.invoice.product.OtherProduct;
 import pl.edu.agh.mwo.invoice.product.Product;
@@ -141,7 +140,18 @@ public class InvoiceTest {
         int n1 = new Invoice().getNumber();
         int n2 = new Invoice().getNumber();
         Assert.assertTrue(n1 < n2);
+    }
 
+    @Test
+    public void testGetProducts() {
+        invoice.addProduct(new TaxFreeProduct("Tablet",new BigDecimal("1678")),2);
+        Assert.assertEquals(invoice.getProducts().size(),1);
+    }
+
+    @Test
+    public void testGetProductsQuantity() {
+        invoice.addProduct(new TaxFreeProduct("Tablet",new BigDecimal("1678")),23);
+        Assert.assertEquals(invoice.getProductsQuantity(),23);
 
     }
 }
