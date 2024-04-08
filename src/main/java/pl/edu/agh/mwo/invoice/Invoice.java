@@ -26,7 +26,11 @@ public class Invoice {
         if (product == null || quantity <= 0) {
             throw new IllegalArgumentException();
         }
-        products.put(product, quantity);
+        int pQQ = quantity;
+         if (products.containsKey(product)) {
+             pQQ = pQQ + products.get(product);
+         }
+        products.put(product, pQQ);
         productsQuantity += quantity;
     }
 

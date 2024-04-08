@@ -21,7 +21,6 @@ public class WydrukFaktury {
                     quantity,
                     product.getPriceWithTax().multiply(BigDecimal.valueOf(quantity))
             );
-
         });
     }
 

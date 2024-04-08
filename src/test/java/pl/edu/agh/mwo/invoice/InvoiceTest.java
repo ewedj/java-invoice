@@ -1,6 +1,7 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -153,6 +154,13 @@ public class InvoiceTest {
         invoice.addProduct(new TaxFreeProduct("Tablet",new BigDecimal("1678")),23);
         Assert.assertEquals(invoice.getProductsQuantity(),23);
 
+    }
+    @Test
+    public void testDuplicatedProducts() {
+        Product tablet = new TaxFreeProduct("Tablet",new BigDecimal("123"));
+        invoice.addProduct(tablet,12);
+        invoice.addProduct(tablet,12);
+        Assert.assertEquals(Optional.ofNullable(invoice.getProducts().get(tablet)).orElse(-1).intValue(), 24);
     }
 }
 
